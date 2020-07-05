@@ -66,8 +66,8 @@ class ExceptionTranslator : ProblemHandling, SecurityAdviceTrait {
     }
 
     override fun handleMethodArgumentNotValid(
-        ex: MethodArgumentNotValidException,
-        request: NativeWebRequest
+      ex: MethodArgumentNotValidException,
+      request: NativeWebRequest
     ): ResponseEntity<Problem>? {
         val result = ex.bindingResult
         val fieldErrors = result.fieldErrors.map { FieldErrorVM(it.objectName.replaceFirst(Regex("DTO$"), ""), it.field, it.code) }
@@ -101,8 +101,8 @@ class ExceptionTranslator : ProblemHandling, SecurityAdviceTrait {
 
     @ExceptionHandler
     fun handleBadRequestAlertException(
-        ex: BadRequestAlertException,
-        request: NativeWebRequest
+      ex: BadRequestAlertException,
+      request: NativeWebRequest
     ): ResponseEntity<Problem>? =
         create(
             ex, request,

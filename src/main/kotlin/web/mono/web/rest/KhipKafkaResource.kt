@@ -21,7 +21,7 @@ import web.mono.config.KafkaProperties
 @RestController
 @RequestMapping("/api/khip-kafka")
 class KhipKafkaResource(
-    private val kafkaProperties: KafkaProperties
+  private val kafkaProperties: KafkaProperties
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -73,9 +73,9 @@ class KhipKafkaResource(
     }
 
     class PublishResult(
-        val topic: String,
-        val partition: Int,
-        val offset: Long,
-        val timestamp: Instant
+      val topic: String,
+      val partition: Int,
+      val offset: Long,
+      val timestamp: Instant
     )
 }

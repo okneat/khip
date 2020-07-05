@@ -3,10 +3,10 @@ import axios from 'axios';
 import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 import promiseMiddleware from 'redux-promise-middleware';
-import { TranslatorContext } from 'react-jhipster';
+import {TranslatorContext} from 'react-jhipster';
 
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
-import password, { ACTION_TYPES, savePassword, reset } from 'app/modules/account/password/password.reducer';
+import {FAILURE, REQUEST, SUCCESS} from 'app/shared/reducers/action-type.util';
+import password, {ACTION_TYPES, reset, savePassword} from 'app/modules/account/password/password.reducer';
 
 describe('Password reducer tests', () => {
   beforeAll(() => {
@@ -27,7 +27,7 @@ describe('Password reducer tests', () => {
 
   describe('Password update', () => {
     it('should detect a request', () => {
-      const toTest = password(undefined, { type: REQUEST(ACTION_TYPES.UPDATE_PASSWORD) });
+      const toTest = password(undefined, {type: REQUEST(ACTION_TYPES.UPDATE_PASSWORD)});
       expect(toTest).toMatchObject({
         updateSuccess: false,
         updateFailure: false,
@@ -35,7 +35,7 @@ describe('Password reducer tests', () => {
       });
     });
     it('should detect a success', () => {
-      const toTest = password(undefined, { type: SUCCESS(ACTION_TYPES.UPDATE_PASSWORD) });
+      const toTest = password(undefined, {type: SUCCESS(ACTION_TYPES.UPDATE_PASSWORD)});
       expect(toTest).toMatchObject({
         updateSuccess: true,
         updateFailure: false,
@@ -43,7 +43,7 @@ describe('Password reducer tests', () => {
       });
     });
     it('should detect a failure', () => {
-      const toTest = password(undefined, { type: FAILURE(ACTION_TYPES.UPDATE_PASSWORD) });
+      const toTest = password(undefined, {type: FAILURE(ACTION_TYPES.UPDATE_PASSWORD)});
       expect(toTest).toMatchObject({
         updateSuccess: false,
         updateFailure: true,
@@ -60,7 +60,7 @@ describe('Password reducer tests', () => {
       };
       expect(
         password(
-          { ...initialState, loading: true },
+          {...initialState, loading: true},
           {
             type: ACTION_TYPES.RESET,
           }
@@ -74,7 +74,7 @@ describe('Password reducer tests', () => {
   describe('Actions', () => {
     let store;
 
-    const resolvedObject = { value: 'whatever' };
+    const resolvedObject = {value: 'whatever'};
     beforeEach(() => {
       const mockStore = configureStore([thunk, promiseMiddleware]);
       store = mockStore({});

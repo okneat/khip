@@ -29,8 +29,8 @@ import org.springframework.web.filter.CorsFilter
  */
 @Configuration
 class WebConfigurer(
-    private val env: Environment,
-    private val jHipsterProperties: JHipsterProperties
+  private val env: Environment,
+  private val jHipsterProperties: JHipsterProperties
 ) : ServletContextInitializer, WebServerFactoryCustomizer<WebServerFactory> {
 
     private val log = LoggerFactory.getLogger(javaClass)

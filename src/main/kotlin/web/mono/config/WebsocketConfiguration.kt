@@ -46,10 +46,10 @@ class WebsocketConfiguration(private val jHipsterProperties: JHipsterProperties)
 
             @Throws(Exception::class)
             override fun beforeHandshake(
-                request: ServerHttpRequest,
-                response: ServerHttpResponse,
-                wsHandler: WebSocketHandler,
-                attributes: MutableMap<String, Any>
+              request: ServerHttpRequest,
+              response: ServerHttpResponse,
+              wsHandler: WebSocketHandler,
+              attributes: MutableMap<String, Any>
             ): Boolean {
                 if (request is ServletServerHttpRequest) {
                     attributes[IP_ADDRESS] = request.remoteAddress
@@ -58,10 +58,10 @@ class WebsocketConfiguration(private val jHipsterProperties: JHipsterProperties)
             }
 
             override fun afterHandshake(
-                request: ServerHttpRequest,
-                response: ServerHttpResponse,
-                wsHandler: WebSocketHandler,
-                exception: Exception?
+              request: ServerHttpRequest,
+              response: ServerHttpResponse,
+              wsHandler: WebSocketHandler,
+              exception: Exception?
             ) {
             }
         }
@@ -70,9 +70,9 @@ class WebsocketConfiguration(private val jHipsterProperties: JHipsterProperties)
     private fun defaultHandshakeHandler(): DefaultHandshakeHandler {
         return object : DefaultHandshakeHandler() {
             override fun determineUser(
-                request: ServerHttpRequest,
-                wsHandler: WebSocketHandler?,
-                attributes: Map<String, Any>?
+              request: ServerHttpRequest,
+              wsHandler: WebSocketHandler?,
+              attributes: Map<String, Any>?
             ): Principal? {
                 var principal: Principal? = request.principal
                 if (principal == null) {

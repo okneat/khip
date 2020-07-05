@@ -27,10 +27,10 @@ import web.mono.service.dto.UserDTO
 @Service
 @Transactional
 class UserService(
-    private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder,
-    private val authorityRepository: AuthorityRepository,
-    private val cacheManager: CacheManager
+  private val userRepository: UserRepository,
+  private val passwordEncoder: PasswordEncoder,
+  private val authorityRepository: AuthorityRepository,
+  private val cacheManager: CacheManager
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -136,8 +136,8 @@ class UserService(
             activated = true,
             authorities = userDTO.authorities?.let { authorities ->
                 authorities.map { authorityRepository.findById(it) }
-                        .filter { it.isPresent }
-                        .mapTo(mutableSetOf()) { it.get() }
+                    .filter { it.isPresent }
+                    .mapTo(mutableSetOf()) { it.get() }
             } ?: mutableSetOf()
         )
         userRepository.save(user)

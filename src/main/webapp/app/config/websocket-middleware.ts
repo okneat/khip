@@ -1,12 +1,12 @@
 import SockJS from 'sockjs-client';
 
 import Stomp from 'webstomp-client';
-import { Observable } from 'rxjs';
-import { Storage } from 'react-jhipster';
+import {Observable} from 'rxjs';
+import {Storage} from 'react-jhipster';
 
-import { ACTION_TYPES as ADMIN_ACTIONS } from 'app/modules/administration/administration.reducer';
-import { ACTION_TYPES as AUTH_ACTIONS } from 'app/shared/reducers/authentication';
-import { SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import {ACTION_TYPES as ADMIN_ACTIONS} from 'app/modules/administration/administration.reducer';
+import {ACTION_TYPES as AUTH_ACTIONS} from 'app/shared/reducers/authentication';
+import {FAILURE, SUCCESS} from 'app/shared/reducers/action-type.util';
 
 let stompClient = null;
 
@@ -28,7 +28,7 @@ const sendActivity = () => {
   connection.then(() => {
     stompClient.send(
       '/topic/activity', // destination
-      JSON.stringify({ page: window.location.hash }), // body
+      JSON.stringify({page: window.location.hash}), // body
       {} // header
     );
   });
@@ -82,7 +82,8 @@ const disconnect = () => {
     stompClient.disconnect();
     stompClient = null;
   }
-  window.onhashchange = () => {};
+  window.onhashchange = () => {
+  };
   alreadyConnectedOnce = false;
 };
 

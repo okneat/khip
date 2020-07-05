@@ -14,15 +14,15 @@ interface PersistenceAuditEventRepository : JpaRepository<PersistentAuditEvent, 
     fun findByPrincipal(principal: String): List<PersistentAuditEvent>
 
     fun findByPrincipalAndAuditEventDateAfterAndAuditEventType(
-        principal: String,
-        after: Instant,
-        type: String
+      principal: String,
+      after: Instant,
+      type: String
     ): List<PersistentAuditEvent>
 
     fun findAllByAuditEventDateBetween(
-        fromDate: Instant,
-        toDate: Instant,
-        pageable: Pageable
+      fromDate: Instant,
+      toDate: Instant,
+      pageable: Pageable
     ): Page<PersistentAuditEvent>
 
     fun findByAuditEventDateBefore(before: Instant): List<PersistentAuditEvent>

@@ -22,8 +22,8 @@ import web.mono.web.rest.vm.LoginVM
 @RestController
 @RequestMapping("/api")
 class UserJWTController(
-    private val tokenProvider: TokenProvider,
-    private val authenticationManagerBuilder: AuthenticationManagerBuilder
+  private val tokenProvider: TokenProvider,
+  private val authenticationManagerBuilder: AuthenticationManagerBuilder
 ) {
     @PostMapping("/authenticate")
     fun authorize(@Valid @RequestBody loginVM: LoginVM): ResponseEntity<JWTToken> {

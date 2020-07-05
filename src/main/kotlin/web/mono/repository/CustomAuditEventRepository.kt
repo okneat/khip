@@ -23,8 +23,8 @@ const val EVENT_DATA_COLUMN_MAX_LENGTH: Int = 255
  */
 @Repository
 class CustomAuditEventRepository(
-    private val persistenceAuditEventRepository: PersistenceAuditEventRepository,
-    private val auditEventConverter: AuditEventConverter
+  private val persistenceAuditEventRepository: PersistenceAuditEventRepository,
+  private val auditEventConverter: AuditEventConverter
 ) : AuditEventRepository {
 
     private val log = LoggerFactory.getLogger(javaClass)

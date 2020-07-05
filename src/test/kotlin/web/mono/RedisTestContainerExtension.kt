@@ -1,4 +1,3 @@
-
 package web.mono
 
 import java.util.concurrent.atomic.AtomicBoolean
@@ -13,7 +12,7 @@ class RedisTestContainerExtension : BeforeAllCallback {
     override fun beforeAll(extensionContext: ExtensionContext) {
         if (!started.get()) {
             val redis = KGenericContainer("redis:6.0.4")
-                    .withExposedPorts(6379)
+                .withExposedPorts(6379)
             redis.start()
             System.setProperty("redis.test.server", "redis://" + redis.getContainerIpAddress() + ":" + redis.getMappedPort(6379))
             started.set(true)

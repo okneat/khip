@@ -107,6 +107,7 @@ fun createFormattingConversionService(): FormattingConversionService {
     registrar.registerFormatters(dfcs)
     return dfcs
 }
+
 /**
  * Finds stored objects of the specified type.
  * @param clazz the class type to be searched.

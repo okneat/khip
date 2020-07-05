@@ -1,6 +1,5 @@
 package web.mono.web.rest
 
-import kotlin.annotation.Retention
 import org.springframework.security.core.context.SecurityContext
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.test.context.support.WithSecurityContext

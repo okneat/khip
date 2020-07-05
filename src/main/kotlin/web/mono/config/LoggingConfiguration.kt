@@ -18,10 +18,10 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @RefreshScope
 class LoggingConfiguration(
-    @Value("\${spring.application.name}") appName: String,
-    @Value("\${server.port}") serverPort: String,
-    jHipsterProperties: JHipsterProperties,
-    mapper: ObjectMapper
+  @Value("\${spring.application.name}") appName: String,
+  @Value("\${server.port}") serverPort: String,
+  jHipsterProperties: JHipsterProperties,
+  mapper: ObjectMapper
 ) {
     init {
         val context = LoggerFactory.getILoggerFactory() as LoggerContext

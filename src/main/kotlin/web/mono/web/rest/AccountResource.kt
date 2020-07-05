@@ -29,9 +29,9 @@ import web.mono.web.rest.vm.ManagedUserVM
 @RestController
 @RequestMapping("/api")
 class AccountResource(
-    private val userRepository: UserRepository,
-    private val userService: UserService,
-    private val mailService: MailService
+  private val userRepository: UserRepository,
+  private val userService: UserService,
+  private val mailService: MailService
 ) {
 
     internal class AccountResourceException(message: String) : RuntimeException(message)

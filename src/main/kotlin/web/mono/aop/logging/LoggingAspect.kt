@@ -43,11 +43,11 @@ open class LoggingAspect(private val env: Environment) {
         Unit // Method is empty as this is just a Pointcut, the implementations are in the advices.
 
     /**
-    * Retrieves the {@link Logger} associated to the given {@link JoinPoint}.
-    *
-    * @param joinPoint join point we want the logger for.
-    * @return {@link Logger} associated to the given {@link JoinPoint}.
-    */
+     * Retrieves the {@link Logger} associated to the given {@link JoinPoint}.
+     *
+     * @param joinPoint join point we want the logger for.
+     * @return {@link Logger} associated to the given {@link JoinPoint}.
+     */
     private fun logger(joinPoint: JoinPoint) = LoggerFactory.getLogger(joinPoint.signature.declaringTypeName)
 
     /**

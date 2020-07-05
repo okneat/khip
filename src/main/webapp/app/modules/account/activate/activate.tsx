@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Row, Col, Alert } from 'reactstrap';
-import { Translate, getUrlParameter } from 'react-jhipster';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {Link, RouteComponentProps} from 'react-router-dom';
+import {Alert, Col, Row} from 'reactstrap';
+import {getUrlParameter, Translate} from 'react-jhipster';
 
-import { IRootState } from 'app/shared/reducers';
-import { activateAction, reset } from './activate.reducer';
+import {IRootState} from 'app/shared/reducers';
+import {activateAction, reset} from './activate.reducer';
 
 const successAlert = (
   <Alert color="success">
@@ -27,7 +27,8 @@ const failureAlert = (
   </Alert>
 );
 
-export interface IActivateProps extends StateProps, DispatchProps, RouteComponentProps<{ key: any }> {}
+export interface IActivateProps extends StateProps, DispatchProps, RouteComponentProps<{ key: any }> {
+}
 
 export const ActivatePage = (props: IActivateProps) => {
   useEffect(() => {
@@ -53,12 +54,12 @@ export const ActivatePage = (props: IActivateProps) => {
   );
 };
 
-const mapStateToProps = ({ activate }: IRootState) => ({
+const mapStateToProps = ({activate}: IRootState) => ({
   activationSuccess: activate.activationSuccess,
   activationFailure: activate.activationFailure,
 });
 
-const mapDispatchToProps = { activateAction, reset };
+const mapDispatchToProps = {activateAction, reset};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

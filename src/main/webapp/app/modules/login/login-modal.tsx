@@ -1,8 +1,8 @@
 import React from 'react';
-import { Translate, translate } from 'react-jhipster';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Alert, Row, Col } from 'reactstrap';
-import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validation';
-import { Link } from 'react-router-dom';
+import {Translate, translate} from 'react-jhipster';
+import {Alert, Button, Col, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row} from 'reactstrap';
+import {AvField, AvForm, AvGroup, AvInput} from 'availity-reactstrap-validation';
+import {Link} from 'react-router-dom';
 
 export interface ILoginModalProps {
   showModal: boolean;
@@ -12,13 +12,13 @@ export interface ILoginModalProps {
 }
 
 class LoginModal extends React.Component<ILoginModalProps> {
-  handleSubmit = (event, errors, { username, password, rememberMe }) => {
-    const { handleLogin } = this.props;
+  handleSubmit = (event, errors, {username, password, rememberMe}) => {
+    const {handleLogin} = this.props;
     handleLogin(username, password, rememberMe);
   };
 
   render() {
-    const { loginError, handleClose } = this.props;
+    const {loginError, handleClose} = this.props;
 
     return (
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false}>
@@ -56,7 +56,8 @@ class LoginModal extends React.Component<ILoginModalProps> {
                 />
                 <AvGroup check inline>
                   <Label className="form-check-label">
-                    <AvInput type="checkbox" name="rememberMe" /> <Translate contentKey="login.form.rememberme">Remember me</Translate>
+                    <AvInput type="checkbox" name="rememberMe" /> <Translate contentKey="login.form.rememberme">Remember
+                    me</Translate>
                   </Label>
                 </AvGroup>
               </Col>
@@ -69,7 +70,8 @@ class LoginModal extends React.Component<ILoginModalProps> {
             </Alert>
             <Alert color="warning">
               <span>
-                <Translate contentKey="global.messages.info.register.noaccount">You don&apos;t have an account yet?</Translate>
+                <Translate
+                  contentKey="global.messages.info.register.noaccount">You don&apos;t have an account yet?</Translate>
               </span>{' '}
               <Link to="/account/register">
                 <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>

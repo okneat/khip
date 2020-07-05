@@ -4,17 +4,17 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
 
-import { REQUEST, FAILURE, SUCCESS } from 'app/shared/reducers/action-type.util';
+import {FAILURE, REQUEST, SUCCESS} from 'app/shared/reducers/action-type.util';
 import administration, {
   ACTION_TYPES,
+  changeLogLevel,
+  getAudits,
+  getConfigurations,
+  getEnv,
+  getLoggers,
   systemHealth,
   systemMetrics,
   systemThreadDump,
-  getLoggers,
-  changeLogLevel,
-  getConfigurations,
-  getEnv,
-  getAudits,
 } from 'app/modules/administration/administration.reducer';
 
 describe('Administration reducer tests', () => {
@@ -42,7 +42,7 @@ describe('Administration reducer tests', () => {
 
   function testMultipleTypes(types, payload, testFunction) {
     types.forEach(e => {
-      testFunction(administration(undefined, { type: e, payload }));
+      testFunction(administration(undefined, {type: e, payload}));
     });
   }
 
@@ -109,7 +109,7 @@ describe('Administration reducer tests', () => {
           },
         },
       };
-      const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_LOGS), payload });
+      const toTest = administration(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_LOGS), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -118,8 +118,8 @@ describe('Administration reducer tests', () => {
     });
 
     it('should update state according to a successful fetch health request', () => {
-      const payload = { data: { status: 'UP' } };
-      const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_HEALTH), payload });
+      const payload = {data: {status: 'UP'}};
+      const toTest = administration(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_HEALTH), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -128,8 +128,8 @@ describe('Administration reducer tests', () => {
     });
 
     it('should update state according to a successful fetch metrics request', () => {
-      const payload = { data: { version: '3.1.3', gauges: {} } };
-      const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_METRICS), payload });
+      const payload = {data: {version: '3.1.3', gauges: {}}};
+      const toTest = administration(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_METRICS), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -138,8 +138,8 @@ describe('Administration reducer tests', () => {
     });
 
     it('should update state according to a successful fetch thread dump request', () => {
-      const payload = { data: [{ threadName: 'hz.gateway.cached.thread-6', threadId: 9266 }] };
-      const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_THREAD_DUMP), payload });
+      const payload = {data: [{threadName: 'hz.gateway.cached.thread-6', threadId: 9266}]};
+      const toTest = administration(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_THREAD_DUMP), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -148,8 +148,8 @@ describe('Administration reducer tests', () => {
     });
 
     it('should update state according to a successful fetch configurations request', () => {
-      const payload = { data: { contexts: { jhipster: { beans: {} } } } };
-      const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_CONFIGURATIONS), payload });
+      const payload = {data: {contexts: {jhipster: {beans: {}}}}};
+      const toTest = administration(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_CONFIGURATIONS), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -161,8 +161,8 @@ describe('Administration reducer tests', () => {
     });
 
     it('should update state according to a successful fetch env request', () => {
-      const payload = { data: { activeProfiles: ['swagger', 'dev'] } };
-      const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_ENV), payload });
+      const payload = {data: {activeProfiles: ['swagger', 'dev']}};
+      const toTest = administration(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_ENV), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -174,9 +174,9 @@ describe('Administration reducer tests', () => {
     });
 
     it('should update state according to a successful fetch audits request', () => {
-      const headers = { ['x-total-count']: 1 };
-      const payload = { data: [{ id: 1, userLogin: username }], headers };
-      const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_AUDITS), payload });
+      const headers = {['x-total-count']: 1};
+      const payload = {data: [{id: 1, userLogin: username}], headers};
+      const toTest = administration(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_AUDITS), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -187,40 +187,52 @@ describe('Administration reducer tests', () => {
   });
   describe('Websocket Message Handling', () => {
     it('should update state according to a successful websocket message receipt', () => {
-      const payload = { id: 1, userLogin: username, page: 'home', sessionId: 'abc123' };
-      const toTest = administration(undefined, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload });
+      const payload = {id: 1, userLogin: username, page: 'home', sessionId: 'abc123'};
+      const toTest = administration(undefined, {type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload});
 
       expect(toTest).toMatchObject({
-        tracker: { activities: [payload] },
+        tracker: {activities: [payload]},
       });
     });
 
     it('should update state according to a successful websocket message receipt - only one activity per session', () => {
-      const firstPayload = { id: 1, userLogin: username, page: 'home', sessionId: 'abc123' };
-      const secondPayload = { id: 1, userLogin: username, page: 'user-management', sessionId: 'abc123' };
-      const firstState = administration(undefined, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload: firstPayload });
-      const secondState = administration(firstState, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload: secondPayload });
+      const firstPayload = {id: 1, userLogin: username, page: 'home', sessionId: 'abc123'};
+      const secondPayload = {id: 1, userLogin: username, page: 'user-management', sessionId: 'abc123'};
+      const firstState = administration(undefined, {
+        type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE,
+        payload: firstPayload,
+      });
+      const secondState = administration(firstState, {
+        type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE,
+        payload: secondPayload,
+      });
 
       expect(secondState).toMatchObject({
-        tracker: { activities: [secondPayload] },
+        tracker: {activities: [secondPayload]},
       });
     });
 
     it('should update state according to a successful websocket message receipt - remove logged out sessions', () => {
-      const firstPayload = { id: 1, userLogin: username, page: 'home', sessionId: 'abc123' };
-      const secondPayload = { id: 1, userLogin: username, page: 'logout', sessionId: 'abc123' };
-      const firstState = administration(undefined, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload: firstPayload });
-      const secondState = administration(firstState, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload: secondPayload });
+      const firstPayload = {id: 1, userLogin: username, page: 'home', sessionId: 'abc123'};
+      const secondPayload = {id: 1, userLogin: username, page: 'logout', sessionId: 'abc123'};
+      const firstState = administration(undefined, {
+        type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE,
+        payload: firstPayload,
+      });
+      const secondState = administration(firstState, {
+        type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE,
+        payload: secondPayload,
+      });
 
       expect(secondState).toMatchObject({
-        tracker: { activities: [] },
+        tracker: {activities: []},
       });
     });
   });
   describe('Actions', () => {
     let store;
 
-    const resolvedObject = { value: 'whatever' };
+    const resolvedObject = {value: 'whatever'};
     beforeEach(() => {
       const mockStore = configureStore([thunk, promiseMiddleware]);
       store = mockStore({});

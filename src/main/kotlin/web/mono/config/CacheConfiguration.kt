@@ -23,8 +23,8 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @EnableCaching
 class CacheConfiguration(
-    @Autowired val gitProperties: GitProperties?,
-    @Autowired val buildProperties: BuildProperties?
+  @Autowired val gitProperties: GitProperties?,
+  @Autowired val buildProperties: BuildProperties?
 ) {
     @Bean
     fun jcacheConfiguration(jHipsterProperties: JHipsterProperties): javax.cache.configuration.Configuration<Any, Any> {
@@ -59,8 +59,8 @@ class CacheConfiguration(
     }
 
     @Bean
-    fun hibernatePropertiesCustomizer(cm: javax.cache.CacheManager) = HibernatePropertiesCustomizer {
-        props -> props[ConfigSettings.CACHE_MANAGER] = cm
+    fun hibernatePropertiesCustomizer(cm: javax.cache.CacheManager) = HibernatePropertiesCustomizer { props ->
+        props[ConfigSettings.CACHE_MANAGER] = cm
     }
 
     @Bean
@@ -82,6 +82,6 @@ class CacheConfiguration(
         }
     }
 
-        @Bean
-        fun keyGenerator() = PrefixedKeyGenerator(gitProperties, buildProperties)
+    @Bean
+    fun keyGenerator() = PrefixedKeyGenerator(gitProperties, buildProperties)
 }

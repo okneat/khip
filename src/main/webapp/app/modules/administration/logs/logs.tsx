@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Translate } from 'react-jhipster';
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {Translate} from 'react-jhipster';
 
-import { getLoggers, changeLogLevel } from '../administration.reducer';
-import { IRootState } from 'app/shared/reducers';
+import {changeLogLevel, getLoggers} from '../administration.reducer';
+import {IRootState} from 'app/shared/reducers';
 
-export interface ILogsPageProps extends StateProps, DispatchProps {}
+export interface ILogsPageProps extends StateProps, DispatchProps {
+}
 
 export const LogsPage = (props: ILogsPageProps) => {
   const [filter, setFilter] = useState('');
@@ -28,8 +29,8 @@ export const LogsPage = (props: ILogsPageProps) => {
 
   const filterFn = l => l.name.toUpperCase().includes(filter.toUpperCase());
 
-  const { logs, isFetching } = props;
-  const loggers = logs ? Object.entries(logs.loggers).map(e => ({ name: e[0], level: e[1].effectiveLevel })) : [];
+  const {logs, isFetching} = props;
+  const loggers = logs ? Object.entries(logs.loggers).map(e => ({name: e[0], level: e[1].effectiveLevel})) : [];
 
   return (
     <div>
@@ -37,7 +38,7 @@ export const LogsPage = (props: ILogsPageProps) => {
         <Translate contentKey="logs.title">Logs</Translate>
       </h2>
       <p>
-        <Translate contentKey="logs.nbloggers" interpolate={{ total: loggers.length }}>
+        <Translate contentKey="logs.nbloggers" interpolate={{total: loggers.length}}>
           There are {loggers.length.toString()} loggers.
         </Translate>
       </p>
@@ -49,83 +50,83 @@ export const LogsPage = (props: ILogsPageProps) => {
 
       <table className="table table-sm table-striped table-bordered" aria-describedby="logs-page-heading">
         <thead>
-          <tr title="click to order">
-            <th>
+        <tr title="click to order">
+          <th>
               <span>
                 <Translate contentKey="logs.table.name">Name</Translate>
               </span>
-            </th>
-            <th>
+          </th>
+          <th>
               <span>
                 <Translate contentKey="logs.table.level">Level</Translate>
               </span>
-            </th>
-          </tr>
+          </th>
+        </tr>
         </thead>
         <tbody>
-          {loggers.filter(filterFn).map((logger, i) => (
-            <tr key={`log-row-${i}`}>
-              <td>
-                <small>{logger.name}</small>
-              </td>
-              <td>
-                <button
-                  disabled={isFetching}
-                  onClick={changeLevel(logger.name, 'TRACE')}
-                  className={getClassName(logger.level, 'TRACE', 'primary')}
-                >
-                  TRACE
-                </button>
-                <button
-                  disabled={isFetching}
-                  onClick={changeLevel(logger.name, 'DEBUG')}
-                  className={getClassName(logger.level, 'DEBUG', 'success')}
-                >
-                  DEBUG
-                </button>
-                <button
-                  disabled={isFetching}
-                  onClick={changeLevel(logger.name, 'INFO')}
-                  className={getClassName(logger.level, 'INFO', 'info')}
-                >
-                  INFO
-                </button>
-                <button
-                  disabled={isFetching}
-                  onClick={changeLevel(logger.name, 'WARN')}
-                  className={getClassName(logger.level, 'WARN', 'warning')}
-                >
-                  WARN
-                </button>
-                <button
-                  disabled={isFetching}
-                  onClick={changeLevel(logger.name, 'ERROR')}
-                  className={getClassName(logger.level, 'ERROR', 'danger')}
-                >
-                  ERROR
-                </button>
-                <button
-                  disabled={isFetching}
-                  onClick={changeLevel(logger.name, 'OFF')}
-                  className={getClassName(logger.level, 'OFF', 'secondary')}
-                >
-                  OFF
-                </button>
-              </td>
-            </tr>
-          ))}
+        {loggers.filter(filterFn).map((logger, i) => (
+          <tr key={`log-row-${i}`}>
+            <td>
+              <small>{logger.name}</small>
+            </td>
+            <td>
+              <button
+                disabled={isFetching}
+                onClick={changeLevel(logger.name, 'TRACE')}
+                className={getClassName(logger.level, 'TRACE', 'primary')}
+              >
+                TRACE
+              </button>
+              <button
+                disabled={isFetching}
+                onClick={changeLevel(logger.name, 'DEBUG')}
+                className={getClassName(logger.level, 'DEBUG', 'success')}
+              >
+                DEBUG
+              </button>
+              <button
+                disabled={isFetching}
+                onClick={changeLevel(logger.name, 'INFO')}
+                className={getClassName(logger.level, 'INFO', 'info')}
+              >
+                INFO
+              </button>
+              <button
+                disabled={isFetching}
+                onClick={changeLevel(logger.name, 'WARN')}
+                className={getClassName(logger.level, 'WARN', 'warning')}
+              >
+                WARN
+              </button>
+              <button
+                disabled={isFetching}
+                onClick={changeLevel(logger.name, 'ERROR')}
+                className={getClassName(logger.level, 'ERROR', 'danger')}
+              >
+                ERROR
+              </button>
+              <button
+                disabled={isFetching}
+                onClick={changeLevel(logger.name, 'OFF')}
+                className={getClassName(logger.level, 'OFF', 'secondary')}
+              >
+                OFF
+              </button>
+            </td>
+          </tr>
+        ))}
         </tbody>
       </table>
     </div>
   );
 };
 
-const mapStateToProps = ({ administration }: IRootState) => ({
+const mapStateToProps = ({administration}: IRootState) => ({
   logs: administration.logs,
   isFetching: administration.loading,
 });
 
-const mapDispatchToProps = { getLoggers, changeLogLevel };
+const mapDispatchToProps = {getLoggers, changeLogLevel};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

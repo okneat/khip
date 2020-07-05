@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Col, Row, Button } from 'reactstrap';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { Translate, translate, getUrlParameter } from 'react-jhipster';
-import { RouteComponentProps } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {Button, Col, Row} from 'reactstrap';
+import {AvField, AvForm} from 'availity-reactstrap-validation';
+import {getUrlParameter, translate, Translate} from 'react-jhipster';
+import {RouteComponentProps} from 'react-router-dom';
 
-import { handlePasswordResetFinish, reset } from '../password-reset.reducer';
+import {handlePasswordResetFinish, reset} from '../password-reset.reducer';
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 
-export interface IPasswordResetFinishProps extends DispatchProps, RouteComponentProps<{ key: string }> {}
+export interface IPasswordResetFinishProps extends DispatchProps, RouteComponentProps<{ key: string }> {
+}
 
 export const PasswordResetFinishPage = (props: IPasswordResetFinishProps) => {
   const [password, setPassword] = useState('');
@@ -34,9 +35,9 @@ export const PasswordResetFinishPage = (props: IPasswordResetFinishProps) => {
           placeholder={translate('global.form.newpassword.placeholder')}
           type="password"
           validate={{
-            required: { value: true, errorMessage: translate('global.messages.validate.newpassword.required') },
-            minLength: { value: 4, errorMessage: translate('global.messages.validate.newpassword.minlength') },
-            maxLength: { value: 50, errorMessage: translate('global.messages.validate.newpassword.maxlength') },
+            required: {value: true, errorMessage: translate('global.messages.validate.newpassword.required')},
+            minLength: {value: 4, errorMessage: translate('global.messages.validate.newpassword.minlength')},
+            maxLength: {value: 50, errorMessage: translate('global.messages.validate.newpassword.maxlength')},
           }}
           onChange={updatePassword}
         />
@@ -47,10 +48,10 @@ export const PasswordResetFinishPage = (props: IPasswordResetFinishProps) => {
           placeholder={translate('global.form.confirmpassword.placeholder')}
           type="password"
           validate={{
-            required: { value: true, errorMessage: translate('global.messages.validate.confirmpassword.required') },
-            minLength: { value: 4, errorMessage: translate('global.messages.validate.confirmpassword.minlength') },
-            maxLength: { value: 50, errorMessage: translate('global.messages.validate.confirmpassword.maxlength') },
-            match: { value: 'newPassword', errorMessage: translate('global.messages.error.dontmatch') },
+            required: {value: true, errorMessage: translate('global.messages.validate.confirmpassword.required')},
+            minLength: {value: 4, errorMessage: translate('global.messages.validate.confirmpassword.minlength')},
+            maxLength: {value: 50, errorMessage: translate('global.messages.validate.confirmpassword.maxlength')},
+            match: {value: 'newPassword', errorMessage: translate('global.messages.error.dontmatch')},
           }}
         />
         <Button color="success" type="submit">
@@ -74,7 +75,7 @@ export const PasswordResetFinishPage = (props: IPasswordResetFinishProps) => {
   );
 };
 
-const mapDispatchToProps = { handlePasswordResetFinish, reset };
+const mapDispatchToProps = {handlePasswordResetFinish, reset};
 
 type DispatchProps = typeof mapDispatchToProps;
 

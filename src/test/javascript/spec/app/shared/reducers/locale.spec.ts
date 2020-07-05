@@ -2,9 +2,9 @@ import axios from 'axios';
 import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { TranslatorContext } from 'react-jhipster';
+import {TranslatorContext} from 'react-jhipster';
 
-import locale, { setLocale, ACTION_TYPES } from 'app/shared/reducers/locale';
+import locale, {ACTION_TYPES, setLocale} from 'app/shared/reducers/locale';
 
 describe('Locale reducer tests', () => {
   it('should return the initial state', () => {
@@ -15,7 +15,7 @@ describe('Locale reducer tests', () => {
   });
 
   it('should correctly set the first time locale', () => {
-    const localeState = locale(undefined, { type: ACTION_TYPES.SET_LOCALE, locale: 'en' });
+    const localeState = locale(undefined, {type: ACTION_TYPES.SET_LOCALE, locale: 'en'});
     expect(localeState).toMatchObject({
       currentLocale: 'en',
     });
@@ -25,7 +25,7 @@ describe('Locale reducer tests', () => {
   it('should correctly detect update in current locale state', () => {
     TranslatorContext.setLocale('en');
     expect(TranslatorContext.context.locale).toEqual('en');
-    const localeState = locale({ currentLocale: 'en' }, { type: ACTION_TYPES.SET_LOCALE, locale: 'es' });
+    const localeState = locale({currentLocale: 'en'}, {type: ACTION_TYPES.SET_LOCALE, locale: 'es'});
     expect(localeState).toMatchObject({
       currentLocale: 'es',
     });
@@ -36,7 +36,7 @@ describe('Locale reducer tests', () => {
     let store;
     beforeEach(() => {
       store = configureStore([thunk])({});
-      axios.get = sinon.stub().returns(Promise.resolve({ key: 'value' }));
+      axios.get = sinon.stub().returns(Promise.resolve({key: 'value'}));
     });
 
     it('dispatches SET_LOCALE action for default locale', async () => {

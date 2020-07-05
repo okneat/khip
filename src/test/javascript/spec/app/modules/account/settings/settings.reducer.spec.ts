@@ -1,14 +1,14 @@
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import {FAILURE, REQUEST, SUCCESS} from 'app/shared/reducers/action-type.util';
 import configureStore from 'redux-mock-store';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import sinon from 'sinon';
-import { TranslatorContext } from 'react-jhipster';
+import {TranslatorContext} from 'react-jhipster';
 
-import account, { ACTION_TYPES, saveAccountSettings, reset } from 'app/modules/account/settings/settings.reducer';
-import { ACTION_TYPES as authActionTypes } from 'app/shared/reducers/authentication';
-import { ACTION_TYPES as localeActionTypes } from 'app/shared/reducers/locale';
+import account, {ACTION_TYPES, reset, saveAccountSettings} from 'app/modules/account/settings/settings.reducer';
+import {ACTION_TYPES as authActionTypes} from 'app/shared/reducers/authentication';
+import {ACTION_TYPES as localeActionTypes} from 'app/shared/reducers/locale';
 
 describe('Settings reducer tests', () => {
   beforeAll(() => {
@@ -29,7 +29,7 @@ describe('Settings reducer tests', () => {
 
   describe('Settings update', () => {
     it('should detect a request', () => {
-      const toTest = account(undefined, { type: REQUEST(ACTION_TYPES.UPDATE_ACCOUNT) });
+      const toTest = account(undefined, {type: REQUEST(ACTION_TYPES.UPDATE_ACCOUNT)});
       expect(toTest).toMatchObject({
         updateSuccess: false,
         updateFailure: false,
@@ -37,7 +37,7 @@ describe('Settings reducer tests', () => {
       });
     });
     it('should detect a success', () => {
-      const toTest = account(undefined, { type: SUCCESS(ACTION_TYPES.UPDATE_ACCOUNT) });
+      const toTest = account(undefined, {type: SUCCESS(ACTION_TYPES.UPDATE_ACCOUNT)});
       expect(toTest).toMatchObject({
         updateSuccess: true,
         updateFailure: false,
@@ -45,7 +45,7 @@ describe('Settings reducer tests', () => {
       });
     });
     it('should detect a failure', () => {
-      const toTest = account(undefined, { type: FAILURE(ACTION_TYPES.UPDATE_ACCOUNT) });
+      const toTest = account(undefined, {type: FAILURE(ACTION_TYPES.UPDATE_ACCOUNT)});
       expect(toTest).toMatchObject({
         updateSuccess: false,
         updateFailure: true,
@@ -62,7 +62,7 @@ describe('Settings reducer tests', () => {
       };
       expect(
         account(
-          { ...initialState, loading: true },
+          {...initialState, loading: true},
           {
             type: ACTION_TYPES.RESET,
           }
@@ -76,10 +76,10 @@ describe('Settings reducer tests', () => {
   describe('Actions', () => {
     let store;
 
-    const resolvedObject = { value: 'whatever' };
+    const resolvedObject = {value: 'whatever'};
     beforeEach(() => {
       const mockStore = configureStore([thunk, promiseMiddleware]);
-      store = mockStore({ authentication: { account: { langKey: 'en' } } });
+      store = mockStore({authentication: {account: {langKey: 'en'}}});
       axios.get = sinon.stub().returns(Promise.resolve(resolvedObject));
       axios.post = sinon.stub().returns(Promise.resolve(resolvedObject));
     });

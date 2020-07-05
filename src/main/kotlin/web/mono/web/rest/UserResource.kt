@@ -58,9 +58,9 @@ import web.mono.web.rest.errors.LoginAlreadyUsedException
 @RestController
 @RequestMapping("/api")
 class UserResource(
-    private val userService: UserService,
-    private val userRepository: UserRepository,
-    private val mailService: MailService
+  private val userService: UserService,
+  private val userRepository: UserRepository,
+  private val mailService: MailService
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)

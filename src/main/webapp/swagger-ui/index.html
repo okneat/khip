@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>khip - Swagger UI</title>
-    <link rel="stylesheet" type="text/css" href="./swagger-ui.css">
-    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16"/>
+    <link href="./swagger-ui.css" rel="stylesheet" type="text/css">
+    <link href="./favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
+    <link href="./favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
 </head>
 
 <body>
@@ -46,7 +46,7 @@
                 plugins: [
                     SwaggerUIBundle.plugins.DownloadUrl
                 ],
-                requestInterceptor: function(req) {
+                requestInterceptor: function (req) {
                     var authToken = JSON.parse(localStorage.getItem("jhi-authenticationToken")
                         || sessionStorage.getItem("jhi-authenticationToken"));
                     if (authToken) {

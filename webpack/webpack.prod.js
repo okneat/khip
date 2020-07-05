@@ -12,7 +12,7 @@ const commonConfig = require('./webpack.common.js');
 
 const ENV = 'production';
 
-module.exports = webpackMerge(commonConfig({ env: ENV }), {
+module.exports = webpackMerge(commonConfig({env: ENV}), {
   // devtool: 'source-map', // Enable source maps. Please note that this will slow down the build
   mode: ENV,
   entry: {
@@ -43,7 +43,7 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
           'postcss-loader',
           {
             loader: 'sass-loader',
-            options: { implementation: sass }
+            options: {implementation: sass}
           }
         ]
       }
@@ -69,10 +69,10 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
             toplevel: true
           },
           output: {
-              comments: false,
-              beautify: false,
-              indent_level: 2,
-              ecma: 6
+            comments: false,
+            beautify: false,
+            indent_level: 2,
+            ecma: 6
           },
           mangle: {
             keep_fnames: true,

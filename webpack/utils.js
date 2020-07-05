@@ -15,7 +15,7 @@ function root(args) {
 }
 
 function mapTypescriptAliasToWebpackAlias(alias = {}) {
-  const webpackAliases = { ...alias };
+  const webpackAliases = {...alias};
   if (!tsconfig.compilerOptions.paths) {
     return webpackAliases;
   }

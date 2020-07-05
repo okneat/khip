@@ -25,10 +25,10 @@ private const val BASE_URL = "baseUrl"
  */
 @Service
 class MailService(
-    private val jHipsterProperties: JHipsterProperties,
-    private val javaMailSender: JavaMailSender,
-    private val messageSource: MessageSource,
-    private val templateEngine: SpringTemplateEngine
+  private val jHipsterProperties: JHipsterProperties,
+  private val javaMailSender: JavaMailSender,
+  private val messageSource: MessageSource,
+  private val templateEngine: SpringTemplateEngine
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)

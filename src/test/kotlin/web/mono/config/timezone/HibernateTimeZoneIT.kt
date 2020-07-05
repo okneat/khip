@@ -35,6 +35,7 @@ class HibernateTimeZoneIT {
 
     @Autowired
     private lateinit var dateTimeWrapperRepository: DateTimeWrapperRepository
+
     @Autowired
     private lateinit var jdbcTemplate: JdbcTemplate
 
@@ -176,8 +177,8 @@ class HibernateTimeZoneIT {
         format("SELECT %s FROM jhi_date_time_wrapper where id=%d", fieldName, id)
 
     private fun assertThatDateStoredValueIsEqualToInsertDateValueOnGMTTimeZone(
-        sqlRowSet: SqlRowSet,
-        expectedValue: String?
+      sqlRowSet: SqlRowSet,
+      expectedValue: String?
     ) {
         while (sqlRowSet.next()) {
             val dbValue = sqlRowSet.getString(1)

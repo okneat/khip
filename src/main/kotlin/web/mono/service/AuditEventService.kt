@@ -22,18 +22,18 @@ import web.mono.repository.PersistenceAuditEventRepository
 @Service
 @Transactional
 class AuditEventService(
-    private val persistenceAuditEventRepository: PersistenceAuditEventRepository,
-    private val auditEventConverter: AuditEventConverter,
-    private val jHipsterProperties: JHipsterProperties
+  private val persistenceAuditEventRepository: PersistenceAuditEventRepository,
+  private val auditEventConverter: AuditEventConverter,
+  private val jHipsterProperties: JHipsterProperties
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
 
     /**
-    * Old audit events should be automatically deleted after 30 days.
-    *
-    * This is scheduled to get fired at 12:00 (am).
-    */
+     * Old audit events should be automatically deleted after 30 days.
+     *
+     * This is scheduled to get fired at 12:00 (am).
+     */
     @Scheduled(cron = "0 0 12 * * ?")
     fun removeOldAuditEvents() {
         persistenceAuditEventRepository

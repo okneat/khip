@@ -1,4 +1,3 @@
-
 package web.mono.service
 
 import io.github.jhipster.config.JHipsterProperties

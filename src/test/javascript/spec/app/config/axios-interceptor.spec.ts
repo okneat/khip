@@ -10,19 +10,19 @@ describe('Axios Interceptor', () => {
     setupAxiosInterceptors(onUnauthenticated);
 
     it('onRequestSuccess is called on fulfilled request', () => {
-      expect((client.interceptors.request as any).handlers[0].fulfilled({ data: 'foo', url: '/test' })).toMatchObject({
+      expect((client.interceptors.request as any).handlers[0].fulfilled({data: 'foo', url: '/test'})).toMatchObject({
         data: 'foo',
       });
     });
     it('onResponseSuccess is called on fulfilled response', () => {
-      expect((client.interceptors.response as any).handlers[0].fulfilled({ data: 'foo' })).toEqual({ data: 'foo' });
+      expect((client.interceptors.response as any).handlers[0].fulfilled({data: 'foo'})).toEqual({data: 'foo'});
     });
     it('onResponseError is called on rejected response', () => {
       (client.interceptors.response as any).handlers[0].rejected({
         response: {
           statusText: 'NotFound',
           status: 403,
-          data: { message: 'Page not found' },
+          data: {message: 'Page not found'},
         },
       });
       expect(onUnauthenticated.calledOnce).toBe(true);

@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Label, Row, Col } from 'reactstrap';
-import { AvForm, AvGroup, AvInput, AvField, AvFeedback } from 'availity-reactstrap-validation';
-import { Translate, translate } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {Link, RouteComponentProps} from 'react-router-dom';
+import {Button, Col, Label, Row} from 'reactstrap';
+import {AvFeedback, AvField, AvForm, AvGroup, AvInput} from 'availity-reactstrap-validation';
+import {Translate, translate} from 'react-jhipster';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import { locales, languages } from 'app/config/translation';
-import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
-import { IRootState } from 'app/shared/reducers';
+import {languages, locales} from 'app/config/translation';
+import {createUser, getRoles, getUser, reset, updateUser} from './user-management.reducer';
+import {IRootState} from 'app/shared/reducers';
 
-export interface IUserManagementUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {}
+export interface IUserManagementUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {
+}
 
 export const UserManagementUpdate = (props: IUserManagementUpdateProps) => {
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.login);
@@ -41,7 +42,7 @@ export const UserManagementUpdate = (props: IUserManagementUpdateProps) => {
   };
 
   const isInvalid = false;
-  const { user, loading, updating, roles } = props;
+  const {user, loading, updating, roles} = props;
 
   return (
     <div>
@@ -106,7 +107,7 @@ export const UserManagementUpdate = (props: IUserManagementUpdateProps) => {
                   validate={{
                     maxLength: {
                       value: 50,
-                      errorMessage: translate('entity.validation.maxlength', { max: 50 }),
+                      errorMessage: translate('entity.validation.maxlength', {max: 50}),
                     },
                   }}
                   value={user.firstName}
@@ -123,7 +124,7 @@ export const UserManagementUpdate = (props: IUserManagementUpdateProps) => {
                   validate={{
                     maxLength: {
                       value: 50,
-                      errorMessage: translate('entity.validation.maxlength', { max: 50 }),
+                      errorMessage: translate('entity.validation.maxlength', {max: 50}),
                     },
                   }}
                   value={user.lastName}
@@ -158,7 +159,8 @@ export const UserManagementUpdate = (props: IUserManagementUpdateProps) => {
               </AvGroup>
               <AvGroup check>
                 <Label>
-                  <AvInput type="checkbox" name="activated" value={user.activated} checked={user.activated} disabled={!user.id} />{' '}
+                  <AvInput type="checkbox" name="activated" value={user.activated} checked={user.activated}
+                           disabled={!user.id} />{' '}
                   <Translate contentKey="userManagement.activated">Activated</Translate>
                 </Label>
               </AvGroup>
@@ -214,7 +216,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   updating: storeState.userManagement.updating,
 });
 
-const mapDispatchToProps = { getUser, getRoles, updateUser, createUser, reset };
+const mapDispatchToProps = {getUser, getRoles, updateUser, createUser, reset};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

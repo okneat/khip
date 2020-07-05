@@ -10,7 +10,7 @@ import Audits from './audits/audits';
 import Docs from './docs/docs';
 import Tracker from './tracker/tracker';
 
-const Routes = ({ match }) => (
+const Routes = ({match}) => (
   <div>
     <ErrorBoundaryRoute path={`${match.url}/user-management`} component={UserManagement} />
     <ErrorBoundaryRoute exact path={`${match.url}/tracker`} component={Tracker} />

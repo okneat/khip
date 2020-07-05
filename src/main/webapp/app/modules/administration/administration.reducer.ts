@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import {FAILURE, REQUEST, SUCCESS} from 'app/shared/reducers/action-type.util';
 
 export const ACTION_TYPES = {
   FETCH_LOGS: 'administration/FETCH_LOGS',
@@ -122,7 +122,7 @@ export default (state: AdministrationState = initialState, action): Administrati
       const activities = [...uniqueActivities, action.payload].filter(activity => activity.page !== 'logout');
       return {
         ...state,
-        tracker: { activities },
+        tracker: {activities},
       };
     }
     default:
@@ -153,7 +153,7 @@ export const getLoggers = () => ({
 });
 
 export const changeLogLevel: (name, configuredLevel) => void = (name, configuredLevel) => {
-  const body = { configuredLevel };
+  const body = {configuredLevel};
   return async dispatch => {
     await dispatch({
       type: ACTION_TYPES.FETCH_LOGS_CHANGE_LEVEL,

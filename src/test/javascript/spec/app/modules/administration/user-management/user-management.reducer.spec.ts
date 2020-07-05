@@ -4,19 +4,19 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
 
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import {FAILURE, REQUEST, SUCCESS} from 'app/shared/reducers/action-type.util';
 import userManagement, {
   ACTION_TYPES,
-  getUsers,
+  createUser,
+  deleteUser,
   getRoles,
   getUser,
-  createUser,
-  updateUser,
-  deleteUser,
+  getUsers,
   reset,
+  updateUser,
 } from 'app/modules/administration/user-management/user-management.reducer';
-import { defaultValue } from 'app/shared/model/user.model';
-import { AUTHORITIES } from 'app/config/constants';
+import {defaultValue} from 'app/shared/model/user.model';
+import {AUTHORITIES} from 'app/config/constants';
 
 describe('User management reducer tests', () => {
   const username = process.env.E2E_USERNAME || 'admin';
@@ -44,7 +44,7 @@ describe('User management reducer tests', () => {
 
   function testMultipleTypes(types, payload, testFunction) {
     types.forEach(e => {
-      testFunction(userManagement(undefined, { type: e, payload }));
+      testFunction(userManagement(undefined, {type: e, payload}));
     });
   }
 
@@ -56,7 +56,7 @@ describe('User management reducer tests', () => {
 
   describe('Requests', () => {
     it('should not modify the current state', () => {
-      testInitialState(userManagement(undefined, { type: REQUEST(ACTION_TYPES.FETCH_ROLES) }));
+      testInitialState(userManagement(undefined, {type: REQUEST(ACTION_TYPES.FETCH_ROLES)}));
     });
 
     it('should set state to loading', () => {
@@ -110,9 +110,9 @@ describe('User management reducer tests', () => {
 
   describe('Success', () => {
     it('should update state according to a successful fetch users request', () => {
-      const headers = { ['x-total-count']: 42 };
-      const payload = { data: 'some handsome users', headers };
-      const toTest = userManagement(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_USERS), payload });
+      const headers = {['x-total-count']: 42};
+      const payload = {data: 'some handsome users', headers};
+      const toTest = userManagement(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_USERS), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -122,8 +122,8 @@ describe('User management reducer tests', () => {
     });
 
     it('should update state according to a successful fetch user request', () => {
-      const payload = { data: 'some handsome user' };
-      const toTest = userManagement(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_USER), payload });
+      const payload = {data: 'some handsome user'};
+      const toTest = userManagement(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_USER), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -132,8 +132,8 @@ describe('User management reducer tests', () => {
     });
 
     it('should update state according to a successful fetch role request', () => {
-      const payload = { data: [AUTHORITIES.ADMIN] };
-      const toTest = userManagement(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_ROLES), payload });
+      const payload = {data: [AUTHORITIES.ADMIN]};
+      const toTest = userManagement(undefined, {type: SUCCESS(ACTION_TYPES.FETCH_ROLES), payload});
 
       expect(toTest).toMatchObject({
         loading: false,
@@ -142,7 +142,7 @@ describe('User management reducer tests', () => {
     });
 
     it('should set state to successful update', () => {
-      testMultipleTypes([SUCCESS(ACTION_TYPES.CREATE_USER), SUCCESS(ACTION_TYPES.UPDATE_USER)], { data: 'some handsome user' }, types => {
+      testMultipleTypes([SUCCESS(ACTION_TYPES.CREATE_USER), SUCCESS(ACTION_TYPES.UPDATE_USER)], {data: 'some handsome user'}, types => {
         expect(types).toMatchObject({
           updating: false,
           updateSuccess: true,
@@ -152,7 +152,7 @@ describe('User management reducer tests', () => {
     });
 
     it('should set state to successful update with an empty user', () => {
-      const toTest = userManagement(undefined, { type: SUCCESS(ACTION_TYPES.DELETE_USER) });
+      const toTest = userManagement(undefined, {type: SUCCESS(ACTION_TYPES.DELETE_USER)});
 
       expect(toTest).toMatchObject({
         updating: false,
@@ -189,7 +189,7 @@ describe('User management reducer tests', () => {
   describe('Actions', () => {
     let store;
 
-    const resolvedObject = { value: 'whatever' };
+    const resolvedObject = {value: 'whatever'};
     beforeEach(() => {
       const mockStore = configureStore([thunk, promiseMiddleware]);
       store = mockStore({});
@@ -283,7 +283,7 @@ describe('User management reducer tests', () => {
           payload: resolvedObject,
         },
       ];
-      await store.dispatch(updateUser({ login: username })).then(() => expect(store.getActions()).toEqual(expectedActions));
+      await store.dispatch(updateUser({login: username})).then(() => expect(store.getActions()).toEqual(expectedActions));
     });
     it('dispatches DELETE_USER_PENDING and DELETE_USER_FULFILLED actions', async () => {
       const expectedActions = [

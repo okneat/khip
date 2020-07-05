@@ -46,9 +46,9 @@ class AuditResource(private val auditEventService: AuditEventService) {
      */
     @GetMapping(params = ["fromDate", "toDate"])
     fun getByDates(
-        @RequestParam(value = "fromDate") fromDate: LocalDate,
-        @RequestParam(value = "toDate") toDate: LocalDate,
-        pageable: Pageable
+      @RequestParam(value = "fromDate") fromDate: LocalDate,
+      @RequestParam(value = "toDate") toDate: LocalDate,
+      pageable: Pageable
     ): ResponseEntity<List<AuditEvent>> {
 
         val from = fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant()

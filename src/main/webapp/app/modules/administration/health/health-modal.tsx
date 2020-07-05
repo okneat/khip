@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader, Table} from 'reactstrap';
 
 const formatDiskSpaceOutput = rawValue => {
   // Should display storage space in an human readable unit
@@ -12,26 +12,26 @@ const formatDiskSpaceOutput = rawValue => {
   }
 };
 
-const HealthModal = ({ handleClose, healthObject, showModal }) => {
+const HealthModal = ({handleClose, healthObject, showModal}) => {
   const data = healthObject.details || {};
   return (
-    <Modal isOpen={showModal} modalTransition={{ timeout: 20 }} backdropTransition={{ timeout: 10 }} toggle={handleClose}>
+    <Modal isOpen={showModal} modalTransition={{timeout: 20}} backdropTransition={{timeout: 10}} toggle={handleClose}>
       <ModalHeader toggle={handleClose}>{healthObject.name}</ModalHeader>
       <ModalBody>
         <Table bordered>
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Value</th>
-            </tr>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+          </tr>
           </thead>
           <tbody>
-            {Object.keys(data).map((key, index) => (
-              <tr key={index}>
-                <td>{key}</td>
-                <td>{healthObject.name === 'diskSpace' ? formatDiskSpaceOutput(data[key]) : JSON.stringify(data[key])}</td>
-              </tr>
-            ))}
+          {Object.keys(data).map((key, index) => (
+            <tr key={index}>
+              <td>{key}</td>
+              <td>{healthObject.name === 'diskSpace' ? formatDiskSpaceOutput(data[key]) : JSON.stringify(data[key])}</td>
+            </tr>
+          ))}
           </tbody>
         </Table>
       </ModalBody>

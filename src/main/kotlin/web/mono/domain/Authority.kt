@@ -18,11 +18,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 data class Authority(
 
-    @field:NotNull
-    @field:Size(max = 50)
-    @Id
-    @Column(length = 50)
-    var name: String? = null
+  @field:NotNull
+  @field:Size(max = 50)
+  @Id
+  @Column(length = 50)
+  var name: String? = null
 
 ) : Serializable {
 

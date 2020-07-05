@@ -1,23 +1,24 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Badge } from 'reactstrap';
-import { Translate, TextFormat } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {Link, RouteComponentProps} from 'react-router-dom';
+import {Badge, Button, Row} from 'reactstrap';
+import {TextFormat, Translate} from 'react-jhipster';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import { APP_DATE_FORMAT } from 'app/config/constants';
-import { languages } from 'app/config/translation';
-import { getUser } from './user-management.reducer';
-import { IRootState } from 'app/shared/reducers';
+import {APP_DATE_FORMAT} from 'app/config/constants';
+import {languages} from 'app/config/translation';
+import {getUser} from './user-management.reducer';
+import {IRootState} from 'app/shared/reducers';
 
-export interface IUserManagementDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {}
+export interface IUserManagementDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {
+}
 
 export const UserManagementDetail = (props: IUserManagementDetailProps) => {
   useEffect(() => {
     props.getUser(props.match.params.login);
   }, []);
 
-  const { user } = props;
+  const {user} = props;
 
   return (
     <div>
@@ -64,7 +65,8 @@ export const UserManagementDetail = (props: IUserManagementDetailProps) => {
           <dt>
             <Translate contentKey="userManagement.createdDate">Created Date</Translate>
           </dt>
-          <dd>{user.createdDate ? <TextFormat value={user.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid /> : null}</dd>
+          <dd>{user.createdDate ?
+            <TextFormat value={user.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid /> : null}</dd>
           <dt>
             <Translate contentKey="userManagement.lastModifiedBy">Last Modified By</Translate>
           </dt>
@@ -84,10 +86,10 @@ export const UserManagementDetail = (props: IUserManagementDetailProps) => {
             <ul className="list-unstyled">
               {user.authorities
                 ? user.authorities.map((authority, i) => (
-                    <li key={`user-auth-${i}`}>
-                      <Badge color="info">{authority}</Badge>
-                    </li>
-                  ))
+                  <li key={`user-auth-${i}`}>
+                    <Badge color="info">{authority}</Badge>
+                  </li>
+                ))
                 : null}
             </ul>
           </dd>
@@ -107,7 +109,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   user: storeState.userManagement.user,
 });
 
-const mapDispatchToProps = { getUser };
+const mapDispatchToProps = {getUser};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

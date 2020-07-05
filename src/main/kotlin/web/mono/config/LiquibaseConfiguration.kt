@@ -22,34 +22,34 @@ class LiquibaseConfiguration(private val env: Environment) {
 
     @Bean
     fun liquibase(
-        @Qualifier("taskExecutor") executor: Executor,
-        @LiquibaseDataSource liquibaseDataSource: ObjectProvider<DataSource>,
-        liquibaseProperties: LiquibaseProperties,
-        dataSource: ObjectProvider<DataSource>,
-        dataSourceProperties: DataSourceProperties
+      @Qualifier("taskExecutor") executor: Executor,
+      @LiquibaseDataSource liquibaseDataSource: ObjectProvider<DataSource>,
+      liquibaseProperties: LiquibaseProperties,
+      dataSource: ObjectProvider<DataSource>,
+      dataSourceProperties: DataSourceProperties
     ) =
-            // If you don't want Liquibase to start asynchronously, substitute by this:
-            // SpringLiquibase liquibase = SpringLiquibaseUtil.createSpringLiquibase(liquibaseDataSource.getIfAvailable(), liquibaseProperties, dataSource.getIfUnique(), dataSourceProperties);
-            SpringLiquibaseUtil.createAsyncSpringLiquibase(this.env, executor, liquibaseDataSource.getIfAvailable(), liquibaseProperties, dataSource.getIfUnique(), dataSourceProperties)
+    // If you don't want Liquibase to start asynchronously, substitute by this:
+        // SpringLiquibase liquibase = SpringLiquibaseUtil.createSpringLiquibase(liquibaseDataSource.getIfAvailable(), liquibaseProperties, dataSource.getIfUnique(), dataSourceProperties);
+        SpringLiquibaseUtil.createAsyncSpringLiquibase(this.env, executor, liquibaseDataSource.getIfAvailable(), liquibaseProperties, dataSource.getIfUnique(), dataSourceProperties)
             .apply {
-            changeLog = "classpath:config/liquibase/master.xml"
-            contexts = liquibaseProperties.contexts
-            defaultSchema = liquibaseProperties.defaultSchema
-            liquibaseSchema = liquibaseProperties.liquibaseSchema
-            liquibaseTablespace = liquibaseProperties.liquibaseTablespace
-            databaseChangeLogLockTable = liquibaseProperties.databaseChangeLogLockTable
-            databaseChangeLogTable = liquibaseProperties.databaseChangeLogTable
-            isDropFirst = liquibaseProperties.isDropFirst
-            labels = liquibaseProperties.labels
-            setChangeLogParameters(liquibaseProperties.parameters)
-            setRollbackFile(liquibaseProperties.rollbackFile)
-            isTestRollbackOnUpdate = liquibaseProperties.isTestRollbackOnUpdate
+                changeLog = "classpath:config/liquibase/master.xml"
+                contexts = liquibaseProperties.contexts
+                defaultSchema = liquibaseProperties.defaultSchema
+                liquibaseSchema = liquibaseProperties.liquibaseSchema
+                liquibaseTablespace = liquibaseProperties.liquibaseTablespace
+                databaseChangeLogLockTable = liquibaseProperties.databaseChangeLogLockTable
+                databaseChangeLogTable = liquibaseProperties.databaseChangeLogTable
+                isDropFirst = liquibaseProperties.isDropFirst
+                labels = liquibaseProperties.labels
+                setChangeLogParameters(liquibaseProperties.parameters)
+                setRollbackFile(liquibaseProperties.rollbackFile)
+                isTestRollbackOnUpdate = liquibaseProperties.isTestRollbackOnUpdate
 
-            if (env.acceptsProfiles(Profiles.of(JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE))) {
-                setShouldRun(false)
-            } else {
-                setShouldRun(liquibaseProperties.isEnabled)
-                log.debug("Configuring Liquibase")
+                if (env.acceptsProfiles(Profiles.of(JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE))) {
+                    setShouldRun(false)
+                } else {
+                    setShouldRun(liquibaseProperties.isEnabled)
+                    log.debug("Configuring Liquibase")
+                }
             }
-        }
 }

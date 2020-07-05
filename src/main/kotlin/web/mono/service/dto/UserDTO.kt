@@ -12,40 +12,40 @@ import web.mono.domain.User
  * A DTO representing a user, with his authorities.
  */
 open class UserDTO(
-    var id: Long? = null,
+  var id: Long? = null,
 
-    @field:NotBlank
-    @field:Pattern(regexp = LOGIN_REGEX)
-    @field:Size(min = 1, max = 50)
-    var login: String? = null,
+  @field:NotBlank
+  @field:Pattern(regexp = LOGIN_REGEX)
+  @field:Size(min = 1, max = 50)
+  var login: String? = null,
 
-    @field:Size(max = 50)
-    var firstName: String? = null,
+  @field:Size(max = 50)
+  var firstName: String? = null,
 
-    @field:Size(max = 50)
-    var lastName: String? = null,
+  @field:Size(max = 50)
+  var lastName: String? = null,
 
-    @field:Email
-    @field:Size(min = 5, max = 254)
-    var email: String? = null,
+  @field:Email
+  @field:Size(min = 5, max = 254)
+  var email: String? = null,
 
-    @field:Size(max = 256)
-    var imageUrl: String? = null,
+  @field:Size(max = 256)
+  var imageUrl: String? = null,
 
-    var activated: Boolean = false,
+  var activated: Boolean = false,
 
-    @field:Size(min = 2, max = 10)
-    var langKey: String? = null,
+  @field:Size(min = 2, max = 10)
+  var langKey: String? = null,
 
-    var createdBy: String? = null,
+  var createdBy: String? = null,
 
-    var createdDate: Instant? = null,
+  var createdDate: Instant? = null,
 
-    var lastModifiedBy: String? = null,
+  var lastModifiedBy: String? = null,
 
-    var lastModifiedDate: Instant? = null,
+  var lastModifiedDate: Instant? = null,
 
-    var authorities: Set<String>? = null
+  var authorities: Set<String>? = null
 
 ) {
     constructor(user: User) :

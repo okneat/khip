@@ -16,12 +16,12 @@ class ArchTest {
 
         noClasses()
             .that()
-                .resideInAnyPackage("web.mono.service..")
+            .resideInAnyPackage("web.mono.service..")
             .or()
-                .resideInAnyPackage("web.mono.repository..")
+            .resideInAnyPackage("web.mono.repository..")
             .should().dependOnClassesThat()
-                .resideInAnyPackage("..web.mono.web..")
-        .because("Services and repositories should not depend on web layer")
-        .check(importedClasses)
+            .resideInAnyPackage("..web.mono.web..")
+            .because("Services and repositories should not depend on web layer")
+            .check(importedClasses)
     }
 }

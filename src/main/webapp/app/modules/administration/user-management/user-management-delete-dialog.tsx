@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { Translate } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {RouteComponentProps} from 'react-router-dom';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import {Translate} from 'react-jhipster';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import { getUser, deleteUser } from './user-management.reducer';
-import { IRootState } from 'app/shared/reducers';
+import {deleteUser, getUser} from './user-management.reducer';
+import {IRootState} from 'app/shared/reducers';
 
-export interface IUserManagementDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {}
+export interface IUserManagementDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {
+}
 
 export const UserManagementDeleteDialog = (props: IUserManagementDeleteDialogProps) => {
   useEffect(() => {
@@ -25,7 +26,7 @@ export const UserManagementDeleteDialog = (props: IUserManagementDeleteDialogPro
     handleClose(event);
   };
 
-  const { user } = props;
+  const {user} = props;
 
   return (
     <Modal isOpen toggle={handleClose}>
@@ -33,7 +34,7 @@ export const UserManagementDeleteDialog = (props: IUserManagementDeleteDialogPro
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
       <ModalBody>
-        <Translate contentKey="userManagement.delete.question" interpolate={{ login: user.login }}>
+        <Translate contentKey="userManagement.delete.question" interpolate={{login: user.login}}>
           Are you sure you want to delete this User?
         </Translate>
       </ModalBody>
@@ -57,7 +58,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   user: storeState.userManagement.user,
 });
 
-const mapDispatchToProps = { getUser, deleteUser };
+const mapDispatchToProps = {getUser, deleteUser};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

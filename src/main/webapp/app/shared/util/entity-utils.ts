@@ -1,5 +1,5 @@
 import pick from 'lodash/pick';
-import { IPaginationBaseState } from 'react-jhipster';
+import {IPaginationBaseState} from 'react-jhipster';
 
 /**
  * Removes fields with an 'id' field that equals ''.
@@ -22,7 +22,7 @@ export const cleanEntity = entity => {
  * @returns The list of objects with mapped ids.
  */
 export const mapIdList = (idList: ReadonlyArray<any>) =>
-  idList.filter((entityId: any) => entityId !== '').map((entityId: any) => ({ id: entityId }));
+  idList.filter((entityId: any) => entityId !== '').map((entityId: any) => ({id: entityId}));
 
 export const overridePaginationStateWithQueryParams = (paginationBaseState: IPaginationBaseState, locationSearch: string) => {
   const params = new URLSearchParams(locationSearch);

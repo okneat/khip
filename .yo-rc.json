@@ -30,7 +30,9 @@
     "clientTheme": "yeti",
     "clientThemeVariant": "primary",
     "creationTimestamp": 1593914432109,
-    "testFrameworks": ["cucumber"],
+    "testFrameworks": [
+      "cucumber"
+    ],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
@@ -42,7 +44,10 @@
     ],
     "enableTranslation": true,
     "nativeLanguage": "en",
-    "languages": ["en", "es"],
+    "languages": [
+      "en",
+      "es"
+    ],
     "blueprints": [
       {
         "name": "generator-jhipster-kotlin",

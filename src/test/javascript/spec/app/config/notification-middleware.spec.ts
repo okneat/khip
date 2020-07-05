@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware } from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import * as toastify from 'react-toastify'; // synthetic default import doesn't work here due to mocking.
 import sinon from 'sinon';
-import { TranslatorContext } from 'react-jhipster';
+import {TranslatorContext} from 'react-jhipster';
 
 import notificationMiddleware from 'app/config/notification-middleware';
 
@@ -35,7 +35,7 @@ describe('Notification Middleware', () => {
     payload: Promise.resolve({
       status: 201,
       statusText: 'Created',
-      headers: { 'app-alert': 'foo.created', 'app-params': 'foo' },
+      headers: {'app-alert': 'foo.created', 'app-params': 'foo'},
     }),
   };
   const DEFAULT_ERROR = {
@@ -55,11 +55,11 @@ describe('Notification Middleware', () => {
           status: 400,
           path: '/api/foos',
           message: 'error.validation',
-          fieldErrors: [{ objectName: 'foos', field: 'minField', message: 'Min' }],
+          fieldErrors: [{objectName: 'foos', field: 'minField', message: 'Min'}],
         },
         status: 400,
         statusText: 'Bad Request',
-        headers: { expires: '0' },
+        headers: {expires: '0'},
       },
     }),
   };
@@ -69,7 +69,7 @@ describe('Notification Middleware', () => {
       response: {
         status: 400,
         statusText: 'Bad Request',
-        headers: { 'app-error': 'foo.creation', 'app-params': 'foo' },
+        headers: {'app-error': 'foo.creation', 'app-params': 'foo'},
       },
     }),
   };

@@ -28,7 +28,7 @@ class UserStepDefs : StepDefs() {
     @When("I search user {string}")
     fun i_search_user(userId: String) {
         actions = restUserMockMvc.perform(get("/api/users/$userId")
-                .accept(MediaType.APPLICATION_JSON))
+            .accept(MediaType.APPLICATION_JSON))
     }
 
     @Then("the user is found")
