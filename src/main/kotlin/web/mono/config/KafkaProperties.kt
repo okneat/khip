@@ -40,7 +40,7 @@ class KafkaProperties {
         }
 
         if (producer["key"] != null) {
-            val key = producer["key"] as Map<String, Any>
+            val key = producer["key"] as Map<*, *>
             val serializer = key["serializer"]
             if (serializer != null) {
                 properties["key.serializer"] = serializer
@@ -48,7 +48,7 @@ class KafkaProperties {
         }
 
         if (producer["value"] != null) {
-            val value = producer["value"] as Map<String, Any>
+            val value = producer["value"] as Map<*, *>
             val serializer = value["serializer"]
             if (serializer != null) {
                 properties["value.serializer"] = serializer

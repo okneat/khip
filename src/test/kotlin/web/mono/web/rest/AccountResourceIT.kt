@@ -495,7 +495,7 @@ class AccountResourceIT {
         )
             .andExpect(status().isOk)
 
-        val updatedUser = userRepository.findOneWithAuthoritiesByLogin(user?.login!!).orElse(null)
+        val updatedUser = userRepository.findOneWithAuthoritiesByLogin(user.login!!).orElse(null)
         assertThat(updatedUser?.firstName).isEqualTo(userDTO.firstName)
         assertThat(updatedUser?.lastName).isEqualTo(userDTO.lastName)
         assertThat(updatedUser?.email).isEqualTo(userDTO.email)

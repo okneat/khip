@@ -189,6 +189,7 @@ class UserService(
             log.debug("Deleted User: $user")
         }
     }
+
     /**
      * Update basic information (first name, last name, email, language) for the current user.
      *
@@ -217,16 +218,15 @@ class UserService(
     fun changePassword(currentClearTextPassword: String, newPassword: String) {
         getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
-                .ifPresent { user ->
-                    val currentEncryptedPassword = user.password
-                    if (!passwordEncoder.matches(currentClearTextPassword, currentEncryptedPassword)) {
-                        throw InvalidPasswordException()
-                    }
-                    val encryptedPassword = passwordEncoder.encode(newPassword)
-                    user.password = encryptedPassword
+            .ifPresent { user ->
+                val currentEncryptedPassword = user.password
+                if (!passwordEncoder.matches(currentClearTextPassword, currentEncryptedPassword)) {
+                    throw InvalidPasswordException()
+                }
+                val encryptedPassword = passwordEncoder.encode(newPassword)
+                user.password = encryptedPassword
                 clearUserCaches(user)
                 log.debug("Changed password for User: $user")
-                user
             }
     }
 
@@ -269,8 +269,8 @@ class UserService(
 
     private fun clearUserCaches(user: User) {
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)?.evict(user.login!!)
-        if (user.email != null) {
-            cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)?.evict(user.email)
+        user.email?.apply {
+            cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)?.evict(this)
         }
     }
 }

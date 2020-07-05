@@ -71,7 +71,7 @@ class UserResourceIT {
 
     @BeforeEach
     fun initTest() {
-        user = createEntity(em)
+        user = createEntity()
         user.apply {
             login = DEFAULT_LOGIN
             email = DEFAULT_EMAIL
@@ -619,7 +619,7 @@ class UserResourceIT {
          * if they test an entity which has a required relationship to the User entity.
          */
         @JvmStatic
-        fun createEntity(em: EntityManager?): User {
+        fun createEntity(): User {
             return User(
                 login = DEFAULT_LOGIN + RandomStringUtils.randomAlphabetic(5),
                 password = RandomStringUtils.random(60),

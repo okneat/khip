@@ -1,7 +1,7 @@
 {
   "name": "khip",
   "version": "0.0.1-SNAPSHOT",
-  "description": "Description for khip",
+  "description": "sample monolith frontend",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [
